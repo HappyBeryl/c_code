@@ -1,30 +1,31 @@
- //#define_CRT_SECURE_NO_WARNINGS 1
-//µÚÒ»Ìâ
-//#include <stdio.h>
-//int main()
-//{
-//	int a = 100;
-//	int b = 200;
-//	int c = 0;
-//	c = a;
-//	a = b;
-//	b = c;
-//	printf("%d %d", a, b);
-//	return 0;
-//}
-//µÚ¶şÌâ
-//#include <stdio.h>
-//int main()
-//{
-//	int a = 100;
-//	int b = 200;
-//	a = a + b;
-//	b = a - b;
-//	a = a - b;
-//	printf("%d %d", a, b);
-//	getchar();
-//	return 0;
-//}
+#define_CRT_SECURE_NO_WARNINGS 1
+// ç»™å®šä¸¤ä¸ªæ•´å½¢å˜é‡çš„å€¼ï¼Œå°†ä¸¤ä¸ªå€¼çš„å†…å®¹è¿›è¡Œäº¤æ¢ã€‚ 
+#include <stdio.h>
+int main()
+{
+	int a = 100;
+	int b = 200;
+	int c = 0;
+	c = a;
+	a = b;
+	b = c;
+	printf("%d %d", a, b);
+	return 0;
+}
+//ä¸å…è®¸åˆ›å»ºä¸´æ—¶å˜é‡ï¼Œäº¤æ¢ä¸¤ä¸ªæ•°çš„å†…å®¹
+#include <stdio.h>
+int main()
+{
+	int a = 100;
+	int b = 200;
+	a = a + b;
+	b = a - b;
+	a = a - b;
+	printf("%d %d", a, b);
+	getchar();
+	return 0;
+}
+//å¼‚æˆ–æ³•
 #include <stdio.h>
 int main()
 {
@@ -33,7 +34,7 @@ int main()
 	//011
 	//101
 	//110
-	//110Óë011Òì»òÊÇ101 110Óë101Òì»òÊÇ011
+	//110ä¸011å¼‚æˆ–æ˜¯101 110ä¸101å¼‚æˆ–æ˜¯011
 	num1 = num1^num2;
 	num2 = num1^num2;
 	num1 = num1^num2;
@@ -42,48 +43,48 @@ int main()
 	return 0;
 }
 
-//µÚÈıÌâ
-//#include <stdio.h>
-//int main()
-//{
-//	int a[10] = { 15, 4, 3, 9, 7, 8, 1, 2, 5, 6 };
-//	int max = a[0];
-//	int i = 0;
-//	for (i = 0; i < 10; i++)
-//	{
-//		if (max < a[i])
-//			max = a[i];
-//	}
-//	printf("%d", max);
-//	return 0;
-//}
-//µÚËÄÌâ
-//#include <stdio.h>
-//int main()
-//{
-//	int i = 0;
-//	int j = 0;
-//	int t = 0;
-//	int a[3] = { 3, 7, 4 };
-//	for (i = 1; i < 3; i++)
-//	{
-//		for (j = 0; j < 3 - i; j++)
-//		{
-//			if (a[j]<a[j + 1])
-//			{
-//				t = a[j];
-//				a[j] = a[j + 1];
-//				a[j + 1] = t;
-//			}
-//		}
-//	}
-//	for (i = 0; i < 3; i++)
-//	{
-//		printf("%d ", a[i]);
-//	}
-//	getchar();
-//	return 0;
-//}
+//æ±‚10 ä¸ªæ•´æ•°ä¸­æœ€å¤§å€¼
+#include <stdio.h>
+int main()
+{
+	int a[10] = { 15, 4, 3, 9, 7, 8, 1, 2, 5, 6 };
+	int max = a[0];
+	int i = 0;
+	for (i = 0; i < 10; i++)
+	{
+		if (max < a[i])
+			max = a[i];
+	}
+	printf("%d", max);
+	return 0;
+}
+//å°†ä¸‰ä¸ªæ•°æŒ‰ä»å¤§åˆ°å°è¾“å‡º
+#include <stdio.h>
+int main()
+{
+	int i = 0;
+	int j = 0;
+	int t = 0;
+	int a[3] = { 3, 7, 4 };
+	for (i = 1; i < 3; i++)
+	{
+		for (j = 0; j < 3 - i; j++)
+		{
+			if (a[j]<a[j + 1])
+			{
+				t = a[j];
+				a[j] = a[j + 1];
+				a[j + 1] = t;
+			}
+		}
+	}
+	for (i = 0; i < 3; i++)
+	{
+		printf("%d ", a[i]);
+	}
+	getchar();
+	return 0;
+}
 
 
 #include <stdio.h>
@@ -115,24 +116,23 @@ int main()
 	return 0;
 }
 
-//µÚÎåÌâ
-//Õ·×ªÏà³ı·¨
-//#include <stdio.h>
-//int main()
-//{
-//	int a = 0;
-//	int b = 0;
-//	int y = 0;
-//	scanf("%d %d", &a, &b);
-//	while (a%b)
-//	{
-//		y = a%b;
-//		a = b;
-//		b = y;
-//	}
-//	printf("%d\n", b);
-//	return 0;
-//}
-//
-×î´ó¹«±¶Êı£ºa*b/×î´ó¹«Ô¼Êı
+//æ±‚ä¸¤ä¸ªæ•°çš„æœ€å¤§å…¬çº¦æ•°ã€‚
+//è¾—è½¬ç›¸é™¤æ³•
+#include <stdio.h>
+int main()
+{
+	int a = 0;
+	int b = 0;
+	int y = 0;
+	scanf("%d %d", &a, &b);
+	while (a%b)
+	{
+      	        y = a%b;
+		a = b;
+		b = y;
+	}
+	printf("%d\n", b);
+	return 0;
+}
+//æœ€å¤§å…¬å€æ•°ï¼ša*b/æœ€å¤§å…¬çº¦æ•°
 
