@@ -52,43 +52,48 @@
 
 //编写一个函数实现n^k，使用递归实现
 //#include <stdio.h>
-//int mul(int m, int j)
-//{
-//	if (j > 0)
+// double Pow(int m, int j)
+// {
+//	if (j >= 1)
 //	{
-//		return m * mul(m, j-1);
-//		j--;
+//		return 1.0 * m * Pow(m, j-1);	
 //	}
-//	else
+//	else if(j == 0)
 //	{
 //		return 1;
 //	}
+//	else
+//   {
+//		return 1.0 / Pow(m, -j);
+//   }
 //}
 //int main()
 //{
 //	int n = 0;
 //	int k = 0;
 //	scanf("%d %d", &n,&k);
-//	int ret = mul(n, k);
-//	printf("%d", ret);
-//
+//	double ret = Pow(n, k);
+//	printf("%lf", ret);
 //	return 0;
 //}
 
 //写一个递归函数DigitSum(n)，输入一个非负整数，返回组成它的数字之和，
 //例如，调用DigitSum(1729)，则应该返回1 + 7 + 2 + 9，它的和是19
 //#include <stdio.h>
-//int DigitSum(int n)
+//int DigitSum(unsigned int n)
 //{
-//	if (n > 0)
+  //   if (n<= 9)
+    //  {
+	//     return n;
+   //   }
+//	else
 //	{
 //		return n % 10 + DigitSum(n / 10);
 //	}
-//	return 0;
 //}
 //int main()
 //{
-//	int num = 0;
+//	unsigned int num = 0;
 //	scanf("%d", &num);
 //	int ret = DigitSum(num);
 //	printf("%d",ret);
@@ -234,20 +239,73 @@
 //}
 
 //编写一个函数 reverse_string(char * string)（递归实现）实现：将参数字符串中的字符反向排列。要求：不能使用C函数库中的字符串操作函数。
+#include <stdio.h>
+#include <assert.h>
+int my_strlen(char* str)
+{
+	assert(str != NULL);
+	int count = 0;
+	while(*str != '\0')
+	{
+		count++;
+		str++;
+	}
+	return count;
+}
+void reverse_string(char* str)
+{
+	int len = my_strlen(str);
+	char* left = str;
+	char* right = len + str - 1;
+	assert(str != NULL);
+	while (left < right)
+	{
+		char tmp = *left;
+		*left = *right;
+		*right = tmp;
+		left++;
+		right--;
+	}
+}
+
+int main()
+{
+	char arr[] = "abcdef";
+	reverse_string(arr);
+	printf("%s\n", arr);
+	return 0;
+}
+
+
 
 //#include <stdio.h>
-//char reverse_string(char* string)
+//#include <assert.h>
+//int my_strlen(char* str)
 //{
-//	if (*string == '\0')
+//	assert(str != NULL);
+//	int count = 0;
+//	while(*str++)
 //	{
-//		return;
+//		count++;
 //	}
-//	reverse_string(string + 1);
-//	printf("%c ", *string);
+//	return count;
 //}
+//
+//char reverse_string(char* str)
+//{
+//	int len = my_strlen(str);
+//	char tmp = *str;
+//	(*str) = *(str + len-1);
+//	*(str + len - 1) = '\0';
+//	if (my_strlen(str + 1) >= 2)
+//	reverse_string(str + 1);
+//	*(str + len - 1) = tmp;
+//}
+//
 //int main()
 //{
-//	char str[] = "abcdef";
-//	reverse_string(str);
+//	char arr[] = "abcdef";
+//	reverse_string(arr);
+//	printf("%s", arr);
 //	return 0;
 //}
