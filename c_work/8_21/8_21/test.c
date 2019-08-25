@@ -1,5 +1,60 @@
 #define  _CRT_SECURE_NO_WARNINGS 1
 
+//unsigned int reverse_bit(unsigned int value);
+//这个函数的返回值value的二进制位模式从左到右翻转后的值。
+//
+//如：
+//在32位机器上25这个值包含下列各位：
+//00000000000000000000000000011001
+//翻转后：（2550136832）
+//10011000000000000000000000000000
+//程序结果返回：
+//2550136832
+//#include <stdio.h>
+//#include <math.h>
+//unsigned int reverse_bit(unsigned int num)
+//{
+//	int i = 0;
+//	unsigned int sum = 0;
+//	for (i = 0; i < 32; i++)
+//	{
+//		//sum += ((num>>i)&1 )* pow( 2,31-i);//库函数
+//		sum += ((num >> i) & 1)*(1 << (31 - i));//二进制位运算
+//	}
+//	return sum;
+//}
+//
+//int main()
+//{
+//	unsigned int num = 25;
+//	unsigned int ret = reverse_bit(num);
+//	printf("%u\n", ret);
+//	return 0;
+//}
+
+//unsigned int reverse_bit(unsigned int num)
+//{
+//	//00000000000000000000000000011001
+//	int i = 0;
+//	unsigned int ret = 0;
+//	for(i=0; i<32; i++)
+//	{
+//		ret <<= 1;
+//		ret |= ((num>>i)&1);
+//	}
+//	return ret;
+//}
+//
+//int main()
+//{
+//	unsigned int num = 25;
+//	unsigned int ret = reverse_bit(num);
+//	printf("%u\n", ret);
+//	return 0;
+//}
+
+
+
 //一组数据中只有一个数字出现了一次。其他所有数字都是成对出现的。请找出这个数字。（使用位运算）
 //#include <stdio.h>
 //int main()
@@ -54,6 +109,7 @@
 //	int b = 0;
 //	scanf("%d %d", &a, &b);
 //	a = (b - a)/2 + a;
+//  //int avgerage = a+((b-a)>>1);
 //	printf("%d\n", a);
 //	return 0;
 //}
@@ -91,24 +147,25 @@
 //
 
 
+//#include <assert.h>
 //#include <stdio.h>
-//
-//int my_strlen(char* str)
+//int my_strlen(const char* str)
 //{
 //	int count = 0;
-//	while (*str++)
+//	assert(str != NULL);
+//	while(*str++)
 //	{
 //		count++;
 //	}
 //	return count;
 //}
 //
-//void reverse_str(char* left, char* right)
+//void reverse_string(char* left, char*right)
 //{
-//	char tmp = 0;
-//	while (left < right)
+//	assert(left && right);
+//	while(left<right)
 //	{
-//		tmp = *left;
+//		char tmp = *left;
 //		*left = *right;
 //		*right = tmp;
 //		left++;
@@ -116,22 +173,183 @@
 //	}
 //}
 //
-//void reverse_word(char* str,int len)
+//void reverse(char arr[])
 //{
-//	char* left = str;
-//	char* right = str + len - 1;
-//	reverse_str(left, right);
-//	printf("%s\n", str);
-//    
+//	//1. 逆序整个字符串
+//	int len = my_strlen(arr);
+//	char *start = NULL;
+//	char* end = arr;
+//	reverse_string(arr, arr+len-1);
+//	//2. 逆序每个单词
+//	while(*end)
+//	{
+//		start = end;
+//		while(*end != ' ' && *end != '\0')
+//		{
+//			end++;
+//		}
+//		reverse_string(start, end-1);
+//		if(*end != '\0')
+//			end++;
+//	}
+//
 //}
 //int main()
 //{
-//	char str[] = "student a am i";
-//	int len = my_strlen(str);
-//	reverse_word(str, len);
-//
+//	char arr[] = "student a am i";
+//	reverse(arr);
+//	printf("%s\n", arr);
 //	return 0;
 //}
+
+//调整数组使奇数全部都位于偶数前面。
+//题目：
+//输入一个整数数组，实现一个函数，
+//来调整该数组中数字的顺序使得数组中所有的奇数位于数组的前半部分，
+//所有偶数位于数组的后半部分。
+
+//void Move(int arr[], int sz)
+//{
+//	int left = 0;
+//	int right = sz-1;
+//	while(left<right)
+//	{
+//		int tmp = 0;
+//		while((left<right)&&(arr[left]%2==1))
+//		{
+//			left++;
+//		}
+//		while((left<right) && (arr[right]%2==0))
+//		{
+//			right--;
+//		}
+//		if(left<right)
+//		{
+//			tmp = arr[left];
+//			arr[left] = arr[right];
+//			arr[right] = tmp;
+//		}
+//		left++;
+//		right--;
+//	}
+//}
+//void Print(int arr[], int sz)
+//{
+//	int i = 0;
+//	for(i=0; i<sz; i++)
+//	{
+//		printf("%d ", arr[i]);
+//	}
+//}
+//int main()
+//{
+//	int arr[] = {1,2,3,4,5,6,7,8,9,10};
+//	int sz = sizeof(arr)/sizeof(arr[0]);
+//	Move(arr, sz);
+//	Print(arr, sz);
+//	return 0;
+//}
+
+
+//杨氏矩阵 
+//有一个二维数组.
+//数组的每行从左到右是递增的，每列从上到下是递增的.
+//在这样的数组中查找一个数字是否存在。
+//时间复杂度小于O(N);
+//
+//数组：
+//1 2 3//右上角一行里面最大的 一列里面最小的
+//2 3 4//左下角一行里面最小的 一列里面最大的
+//3 4 5
+//
+//
+//1 3 4
+//2 4 5
+//4 5 6
+//
+//1 2 3
+//4 5 6
+//7 8 9
+
+//#include <stdio.h>
+//void Find(int arr[3][3], int row, int col, int k)
+//{
+//	int x = 0;
+//	int y = col-1;
+//
+//	while(y>=0 && x<=row-1)
+//	{
+//		if(arr[x][y] > k)
+//		{
+//			y--;
+//		}
+//		else if(arr[x][y] < k)
+//		{
+//			x++;
+//		}
+//		else
+//		{
+//			printf("找到了，下标是：%d %d\n",x,y);//还可以返回结构体变量
+//          return;
+//		}
+//	}
+//}
+//
+//int main()
+//{
+//	int arr[3][3] = {1,2,3,4,5,6,7,8,9};
+//	Find(arr, 3, 3, 7);
+//	return 0;
+//}
+
+
+
+//void Find(int arr[3][3], int* prow, int* pcol, int k)
+//{
+//	int x = 0;
+//	int y = *pcol-1;
+//
+//	while(y>=0 && x<=*prow-1)
+//	{
+//		if(arr[x][y] > k)
+//		{
+//			y--;
+//		}
+//		else if(arr[x][y] < k)
+//		{
+//			x++;
+//		}
+//		else
+//		{
+//			*prow = x;
+//			*pcol = y;
+//			return;
+//		}
+//	}
+//	*prow = -1;
+//	*pcol = -1;
+//}
+//
+//int main()
+//{
+//	int arr[3][3] = {1,2,3,4,5,6,7,8,9};
+//	int row = 3;
+//	int col = 3;
+//	Find(arr, &row, &col, 7);//返回型变量
+//	if(row == -1 && col==-1)
+//	{
+//		printf("找不到\n");
+//	}
+//	else
+//	{
+//		printf("找到了:%d %d\n" ,row, col);
+//	}
+//	return 0;
+//}
+//
+
+
+
 
 
 //课堂的
@@ -357,26 +575,26 @@
 //}
 
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-int cmp_stu_by_name(const void* e1, const void* e2)
-{
-	return strcmp(((struct Stu*)e1)->name, ((struct Stu*)e2)->name);//强制类型转换
-}
-
-int main()
-{
-	struct Stu
-	{
-		char name[20];
-		short age;
-	};
-	struct Stu arr[] = { { "zhangsan", 20 }, { "lisi", 50 }, { "wangwu", 15 } };
-	int sz = sizeof(arr) / sizeof(arr[0]);
-	qsort(arr, sz, sizeof(arr[0]), cmp_stu_by_name);
-	return 0;
-}
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <string.h>
+//int cmp_stu_by_name(const void* e1, const void* e2)
+//{
+//	return strcmp(((struct Stu*)e1)->name, ((struct Stu*)e2)->name);//强制类型转换
+//}
+//
+//int main()
+//{
+//	struct Stu
+//	{
+//		char name[20];
+//		short age;
+//	};
+//	struct Stu arr[] = { { "zhangsan", 20 }, { "lisi", 50 }, { "wangwu", 15 } };
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	qsort(arr, sz, sizeof(arr[0]), cmp_stu_by_name);
+//	return 0;
+//}
 
 
 //#include <stdio.h>
@@ -431,6 +649,10 @@ int main()
 //	return 0;
 //}
 //
+
+#include <stdio.h>
+
+
 
 
 

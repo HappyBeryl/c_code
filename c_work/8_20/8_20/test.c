@@ -1,6 +1,7 @@
 #define  _CRT_SECURE_NO_WARNINGS
 
 
+
 //#include <stdio.h>
 //int count_one_bits(unsigned int value)
 //{
