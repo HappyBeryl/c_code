@@ -578,23 +578,26 @@
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <string.h>
-//int cmp_stu_by_name(const void* e1, const void* e2)
+//int cmp_stu_by_name(const void*e1, const void*e2)
 //{
-//	return strcmp(((struct Stu*)e1)->name, ((struct Stu*)e2)->name);//强制类型转换
+//	return strcmp(((struct Stu*)e1)->name, ((struct Stu*)e2)->name);
 //}
+//
+//struct Stu
+//{
+//	char name[20];
+//	short age;
+//};
 //
 //int main()
 //{
-//	struct Stu
-//	{
-//		char name[20];
-//		short age;
-//	};
 //	struct Stu arr[] = { { "zhangsan", 20 }, { "lisi", 50 }, { "wangwu", 15 } };
 //	int sz = sizeof(arr) / sizeof(arr[0]);
 //	qsort(arr, sz, sizeof(arr[0]), cmp_stu_by_name);
 //	return 0;
 //}
+
+
 
 
 //#include <stdio.h>
@@ -650,7 +653,7 @@
 //}
 //
 
-#include <stdio.h>
+
 
 
 
