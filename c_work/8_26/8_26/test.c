@@ -1,5 +1,4 @@
 
-
 //计数器实现
 //int my_strlen(char* str)
 //{
@@ -66,6 +65,37 @@
 //	printf("%s\n",(char*) ret);
 //	return 0;
 //}
+//
+
+
+//#include <stdio.h>
+//#include <assert.h>
+//char* my_strncpy(char* des, const char* src, size_t count)
+//{
+//	char* ret = des;
+//	assert(des && src);
+//	while (count && (*des++ = *src++))  //拷贝字符串 (拷贝\0 )
+//	{
+//		count--;
+//	}
+//	if (count)                //目标后面追加0           
+//	while (--count)   //遇到\0就要结束所以为--count
+//	{
+//		*des++ = '\0';
+//	}
+//	return ret;
+//}
+//
+//int main()
+//{
+//	char arr[20] = { 0 };
+//	char str[] = "hello world";
+//	char* ret = my_strncpy(arr, str, 5);
+//	printf("%s\n", ret);
+//	return 0;
+//}
+//
+
 
 //#include <stdio.h>
 //#include <assert.h>
@@ -97,6 +127,36 @@
 //}
 
 
+//
+//#include <stdio.h>
+//#include <assert.h>
+//char* my_strncat(char* des, char* src, size_t count)
+//{
+//	char* ret = des;
+//	assert(des && src);
+//	while (*(++des))
+//	{
+//		;
+//	}
+//	while (count && (*des++ = *src++))
+//	{
+//		count--;
+//	}
+//	*des = '\0';
+//	return ret;
+//}
+//
+//int main()
+//{
+//	char str1[20] = "hello ";
+//	char str2[5] = "world";
+//	char* ret = my_strncat(str1,str2,3);
+//	printf("%s\n", ret);
+//	return 0;
+//}
+
+
+
 //#include <stdio.h>
 //#include <assert.h>
 //int my_strcmp(const char* arr,const char* str)
@@ -124,6 +184,37 @@
 //		printf("等于\n");
 //	return 0;
 //}
+
+
+//#include <stdio.h>
+//#include <assert.h>
+//int my_strncmp(char* s1, char* s2, size_t n) //一个字节一个字节的拷贝
+//{
+//	int ret = 0;
+//	assert(s1 && s2);
+//	while ((*s1 == *s2) && n)
+//	{
+//	    s1++;
+//		s2++;
+//		n--;
+//	} 
+//	return ret = *s1 - *s2;
+//}
+//
+//int main()
+//{
+//	char str1[] = "abcef";
+//	char str2[] = "abcdg";
+//	int ret = my_strncmp(str1, str2,3);
+//	if (ret > 0)
+//		printf("大于\n");
+//	else if (ret < 0)
+//		printf("小于\n");
+//	else
+//		printf("等于\n");
+//	return 0;
+//}
+
 
 
 //#include <stdio.h>
@@ -172,86 +263,108 @@
 
 
 //#include <stdio.h>
-//#include <assert.h>
-//char* my_strncpy(char* des, const char* src,int count)
+//#include <string.h>
+//void  my_strchr(char* arr, char ch)
 //{
-//	char* ret = des;
-//	assert(des && src);
-//	while (count && (*des++ = *src++))  //拷贝字符串 (拷贝\0 )
-//	{
-//		count--;
+//	int len = strlen(arr);
+//	int i = 0;
+//	while (i < len)
+//	{	if (ch == arr[i])
+//		{
+//		    printf("%c\n", ch);
+//			break;
+//		}
+//	    i++;
 //	}
-//	if (count)                //目标后面追加0           
-//	while (--count)   //遇到\0就要结束所以为--count
+//	if (i == len)
 //	{
-//		*des++ = '\0';
+//		printf("找不到\n");
 //	}
-//	return ret;
 //}
 //
 //int main()
 //{
-//	char arr[20] = { 0 };
-//	char str[] = "hello world";
-//	char* ret = my_strncpy(arr, str, 5);
-//	printf("%s\n", ret);
+//	char arr[] = "hello world";
+//	my_strchr(arr, 'a');
 //	return 0;
 //}
 
 
 //#include <stdio.h>
 //#include <assert.h>
-//char* my_strncat(char* des, char* src, int count)
+//void* my_memcpy(void* dest, const void* src, size_t count)
 //{
-//	char* ret = des;
-//	assert(des && src);
-//	while (*(++des))
+//	void* ret = dest;
+//	assert(dest && src);
+//	while(count--)	
 //	{
-//		;
+//		*(char*)dest = *(char*)src;
+//		++(char*)dest;
+//		++(char*)src;
+//		//dest = (char*)dest+1;
+//		//src = (char*)src+1;
 //	}
-//	while (count && (*des++ = *src++))
-//	{
-//		count--;
-//	}
-//	*des = '\0';
 //	return ret;
 //}
-//
 //int main()
 //{
-//	char str1[20] = "hello ";
-//	char str2[5] = "world";
-//	char* ret = my_strncat(str1,str2,3);
-//	printf("%s\n", ret);
+//	int arr1[10] = {0};
+//	int arr2[] = {1,2,3,4,5,6 };
+//    my_memcpy(arr1, arr2, 20);
 //	return 0;
 //}
 
 
+//#include <stdio.h>
+//#include <assert.h>
+//void* my_memmove(void* des, void* src, size_t count)
+//{
+//	assert(des && src);
+//	if (src < des) //从后向前
+//	{
+//		while (count--)
+//		{
+//			*((char*)des+count) = *((char*)src+count);
+//		}
+//	}
+//	else //从前向后
+//	{
+//		while (count--)
+//		{
+//			*((char*)des) = *((char*)(src));
+//			((char*)des)++;
+//			((char*)src)++;
+//		}
+//	}
+//}
+//
+//int main()
+//{
+//	int arr[] = {1,2,3,4,5,6,7,8,9,10};
+//	my_memmove(arr+2, arr, 16);
+//	return 0;
+//}
+//
+
 #include <stdio.h>
-#include <assert.h>
-int my_strncmp(char* s1, char* s2, int n)
+void fly(int* arr, int k)
 {
-	int ret = 0;
-	assert(s1 && s2);
-	while ((*s1 == *s2) && n)
+	int start = 0;
+	int j = 0;
+	for (j = 0; j < k; j++)
 	{
-	    s1++;
-		s2++;
-		n--;
-	} 
-	return ret = *s1 - *s2;
+		int i = 0;
+		while (*arr)
+		{
+			start = arr[0];
+			arr[i] = arr[i + 1];
+		}
+	}
+	printf("%d", arr);
 }
 
 int main()
 {
-	char str1[] = "abcef";
-	char str2[] = "abcdg";
-	int ret = my_strncmp(str1, str2,3);
-	if (ret > 0)
-		printf("大于\n");
-	else if (ret < 0)
-		printf("小于\n");
-	else
-		printf("等于\n");
-	return 0;
+	int arr[] = { 1, 2, 3, 4, 5, 6 };
+	fly(arr, 3);
 }
