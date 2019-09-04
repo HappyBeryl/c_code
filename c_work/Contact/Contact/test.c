@@ -39,7 +39,8 @@ int main()
 		case (SHOW) :
 		  ShowContact(&con);
 	    	break;
-		case(EXIT):
+		case(EXIT) :
+			DestroyContact(&con);
 			printf("ÍË³ö");
 			break;
 		default:

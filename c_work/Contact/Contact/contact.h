@@ -11,12 +11,16 @@
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>
+#include <stdlib.h>
+#include <errno.h>
 
 #define MAX 1000
 #define NAME_MAX 20
 #define SEX_MAX 5
 #define TELE_MAX 12
 #define ADDR_MAX 25
+#define DEFAULT_SZ 3
+
 
 
 typedef struct PeoInfo
@@ -40,10 +44,17 @@ enum Option
 };
 
 //通讯录结构体
+//typedef struct Contact
+//{
+//	PeoInfo date[MAX]; //存放真实数据的空间
+//	int sz; //记录录入信息个数
+//}Contact;
+
 typedef struct Contact
 {
-	PeoInfo date[MAX]; //存放真实数据的空间
-	int sz; //记录录入信息个数
+	PeoInfo* date;
+	int sz;
+	int capacity; //容量
 }Contact;
 
 void InitContact( Contact* pcon);
@@ -52,4 +63,6 @@ void ShowContact(const Contact* pcon);
 void DelContact(Contact* pcon);
 void SearchContact(Contact* pcon);
 void Modify(Contact* pcon);
+void DestroyContact(Contact* pcon);
+
 

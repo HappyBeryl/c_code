@@ -5,17 +5,48 @@ void InitContact(Contact* pcon)
 {
 	assert(pcon);
 	 pcon->sz = 0;
-	 memset( pcon->date, 0, sizeof(pcon->date));
+	// memset( pcon->date, 0, sizeof(pcon->date));
+	 pcon->date = (PeoInfo*)calloc(DEFAULT_SZ, sizeof(PeoInfo));
+	if (pcon->date == NULL)
+	{
+		printf("%s\n", strerror(errno));
+		return;
+	}
+	pcon->capacity = DEFAULT_SZ;
+}
+
+void DestroyContact(Contact* pcon)
+{
+	free(pcon->date);
+	pcon->date = NULL;
+	pcon->capacity = 0;
+	pcon->sz = 0;
+}
+
+void Check_capacity(Contact* pcon)
+{
+	if (pcon->sz == pcon->capacity)
+	{
+		//增容
+		PeoInfo* ptr = realloc(pcon->date, (pcon->capacity)*sizeof(PeoInfo));
+		if (ptr != NULL)
+		{
+			pcon->date = ptr;
+			pcon->capacity += 2;
+			printf("增容成功\n");
+		}
+	}
 }
 
 void AddContact(Contact* pcon)
 {
 	assert(pcon);
-	if (pcon->sz == MAX)
-	{
-		printf("通讯录已满，无法添加");
-		return 0;
-	}
+	Check_capacity(pcon);
+	//if (pcon->sz == MAX)
+	//{
+    //   printf("通讯录已满，无法添加");
+	//	return 0;
+	//}
 	//录入信息
 	printf("请输入名字:");
 	scanf("%s", pcon->date[pcon->sz].name);
