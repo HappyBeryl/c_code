@@ -1,28 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "contact.h"
 
-void InitContact(Contact* pcon)
-{
-	assert(pcon);
-	 pcon->sz = 0;
-	// memset( pcon->date, 0, sizeof(pcon->date));
-	 pcon->date = (PeoInfo*)calloc(DEFAULT_SZ, sizeof(PeoInfo));
-	if (pcon->date == NULL)
-	{
-		printf("%s\n", strerror(errno));
-		return;
-	}
-	pcon->capacity = DEFAULT_SZ;
-}
-
-void DestroyContact(Contact* pcon)
-{
-	free(pcon->date);
-	pcon->date = NULL;
-	pcon->capacity = 0;
-	pcon->sz = 0;
-}
-
 void Check_capacity(Contact* pcon)
 {
 	if (pcon->sz == pcon->capacity)
@@ -36,6 +14,52 @@ void Check_capacity(Contact* pcon)
 			printf("增容成功\n");
 		}
 	}
+}
+
+void LoadContact(Contact* pcon)
+{
+	PeoInfo tmp = { 0 };
+	FILE* pfRead = fopen("contact.dat", "rb");
+	if (pfRead == NULL)
+	{
+		printf("加载信息：打开文件失败\n");
+			return;
+	}
+	//加载信息
+	while (fread(&tmp, sizeof(PeoInfo), 1, pfRead))
+	{
+		Check_capacity(pcon);
+		pcon->date[pcon->sz] = tmp;
+		pcon->sz++;
+	}
+	fclose(pfRead);
+	pfRead = NULL;
+}
+
+
+void InitContact(Contact* pcon)
+{
+	assert(pcon);
+	 pcon->sz = 0;
+	// memset( pcon->date, 0, sizeof(pcon->date));
+	 pcon->date = (PeoInfo*)calloc(DEFAULT_SZ, sizeof(PeoInfo));
+	if (pcon->date == NULL)
+	{
+		printf("%s\n", strerror(errno));
+		return;
+	}
+	pcon->capacity = DEFAULT_SZ;
+	//加载文件
+	LoadContact(pcon);
+}
+
+
+void DestroyContact(Contact* pcon)
+{
+	free(pcon->date);
+	pcon->date = NULL;
+	pcon->capacity = 0;
+	pcon->sz = 0;
 }
 
 void AddContact(Contact* pcon)
@@ -168,4 +192,22 @@ void Modify(Contact* pcon)
 	printf("请输入地址:");
 	scanf("%s", &(pcon->date[ret].addr));
 	printf("修改成功\n");
+}
+
+void SaveContact(Contact* pcon)
+{
+	int i = 0;
+	FILE* pfWrite = fopen("contact.dat", "wb");
+	if (pfWrite == NULL)
+	{
+		printf("保存信息：打开文件失败\n");
+	}
+	//保存信息
+	for (i = 0; i < pcon->sz; i++)
+	{
+		fwrite(pcon->date + i, sizeof(PeoInfo), 1, pfWrite);
+	}
+	//关闭文件
+	fclose(pfWrite);
+	pfWrite = NULL;
 }

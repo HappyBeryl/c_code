@@ -40,6 +40,7 @@ int main()
 		  ShowContact(&con);
 	    	break;
 		case(EXIT) :
+			SaveContact(&con);
 			DestroyContact(&con);
 			printf("ÍË³ö");
 			break;
