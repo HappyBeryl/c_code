@@ -319,4 +319,18 @@ int main()
 	Print(arr,sz);
 	return 0;
 }
+int main()
+{
+	int a = 3;
+	int b = 2;
+	swap(&a,&b);
+	printf("%d %d",&a,&b);
+	return 0;
+}
+void swap(int* a,int* b) 
+{	
+	int c = *a;
+	*a = *b;
+	*b = c;	
+}
 
